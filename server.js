@@ -21,18 +21,22 @@ app.use('/uploads', express.static('uploads'))
 
 //=======================CORS LIBEREY  ================================================================
 const cors = require('cors')
+// app.use(cors())
 app.use(cors({
-    origin: ["http://localhost:3000"],
+  origin: ["http://localhost:3000", "http://localhost:3001"],
+    // origin: "*",
     methods:["GET", "POST", "PUT", "DELETE"],
-    credentials:true
+    credentials:true,
+    optionsSuccessStatus: 200
   }));
+
 app.use(express.json());    
 app.use(cookieParser())
 app.use(bodyParser.json());
 // ========================MONGOODB CONNECTION =========================================================================
 //
-// mongoose.connect('mongodb://127.0.0.1:27017/udaipur')
- mongoose.connect('mongodb+srv://dbTours:dbUdaipurTours@tour.oobe1.mongodb.net/Tour?retryWrites=true&w=majority ')
+mongoose.connect('mongodb://127.0.0.1:27017/udaipur' )
+//  mongoose.connect('mongodb+srv://dbTours:dbUdaipurTours@tour.oobe1.mongodb.net/Tour?retryWrites=true&w=majority ')
 .then(()=>{
     console.log("mongoodb connected successfull ")
 }).catch(err => {
